@@ -1,0 +1,78 @@
+import React from "react";
+// import "bootstrap/dist/css/bootstrap.min.css";
+import "../style/login.css";
+import { useState } from "react";
+import axios from "axios";
+import { useNavigate, Link } from "react-router-dom";
+import "../style/login.css";
+
+const Form = () => {
+  let navigate = useNavigate();
+
+  const [user, setUser] = useState({
+    phone_number: "",
+    password: "",
+  });
+
+  const handle = (e) => {
+    const { name, value } = e.target;
+    setUser({ ...user, [name]: value });
+  };
+
+  const handleSubmit = () => {
+    const options = {
+      url: "http://localhost:3001/login",
+      method: "POST",
+      data: user,
+    };
+    console.log(user);
+    axios(options)
+      .then((response) => {
+        console.log(response.data);
+        // navigate("../home");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  return (
+    <>
+      <div class="contanier">
+        <div class="w-50 mx-auto py-5 shadow p-4">
+          <div className="lb">
+            <h2>Login</h2>
+
+            <div className="indiv">
+              <h5>Email</h5>
+              <input
+                type="text"
+                name="email"
+                value={user.email}
+                required=""
+                onChange={handle}
+              />
+
+              <h5>Password</h5>
+              <input
+                type="password"
+                name="password"
+                value={user.password}
+                required=""
+                onChange={handle}
+              />
+            </div>
+
+            <button className="butt" onClick={handleSubmit}>
+              Login
+            </button>
+            <div className="slink">
+              Not Registered?
+              <Link to="/Signup">Sign up</Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+export default Form;

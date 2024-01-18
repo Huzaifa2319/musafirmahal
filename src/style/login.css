@@ -1,0 +1,53 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.contanier {
+  color: white !important;
+  background-image: url("../images/bg.jpg");
+  height: 130vh;
+  width: 100% !important;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.w-50 {
+  width: 25% !important;
+  position: absolute !important;
+  top: 120px;
+
+  border-radius: 10px;
+  left: 35%;
+}
+
+.lb .indiv input {
+  width: 100%;
+  padding: 10px 0;
+  /* font-size: 16px; */
+  color: rgb(24, 0, 0);
+  margin-bottom: 10px;
+  border: none;
+  border-bottom: 1px solid black;
+  outline: none;
+  background: transparent;
+}
+
+.sb .sindiv input {
+  width: 100%;
+  color: rgb(24, 0, 0);
+  margin-bottom: 2px;
+  border: none;
+  border-bottom: 1px solid black;
+  outline: none;
+  background: transparent;
+}
+
+@media only screen and (max-width: 600px) {
+  .w-50 {
+    width: 100% !important;
+    left: 0 !important;
+  }
+}
