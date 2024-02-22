@@ -9,7 +9,7 @@ const Home = () => {
 
   useEffect(() => {
     axios({
-      url: "http://localhost:3001/getTrips",
+      url: "https://musafirmahalbackend.vercel.app/gettrips",
       method: "GET",
     })
       .then((response) => {
@@ -33,16 +33,23 @@ const Home = () => {
           </div>
         </div>
         <section className="articles">
-          {/* <Card /> */}
-          {/* {console.log(trips.length)} */}
-          {trips.map(Show)}
-          {/* <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card /> */}
+          {trips.filter((t) => t.isExpire == false).length == 0 ? (
+            <h2 style={{ color: "red" }}>No Trips Available</h2>
+          ) : (
+            trips.filter((t) => t.isExpire == false).map(Show)
+          )}
+          {/* {trips.filter((t) => t.isExpire == false).map(Show)} */}
+          {/* {trips.map(Show)} */}
+        </section>
+        <hr style={{ margin: "70px auto 20px auto", width: "80%" }} />
+        <h2> Past Trips</h2>
+        <br />
+        <section className="articles">
+          {trips.filter((t) => t.isExpire == true).length == 0 ? (
+            <h3 style={{ color: "red" }}>No Past Trips to show</h3>
+          ) : (
+            trips.filter((t) => t.isExpire == true).map(Show)
+          )}
         </section>
       </div>
     </>

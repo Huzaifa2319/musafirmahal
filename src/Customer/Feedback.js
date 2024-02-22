@@ -8,19 +8,19 @@ const Feedback = () => {
   // let navigate = useNavigate();
 
   const [feed, setfeed] = useState({
-    user_email: "",
+    title: "",
     feedback: "",
   });
 
   const handle = (e) => {
-    // console.log(e.target);
+    // console.log(">>>>", e.target.value);
     const { name, value } = e.target;
     setfeed({ ...feed, [name]: value });
   };
 
   const clickHandel = () => {
     const options = {
-      url: "http://localhost:3001/api/givefeedbacks",
+      url: "https://musafirmahalbackend.vercel.app/giveFeedback",
       method: "POST",
       data: feed,
     };
@@ -28,7 +28,11 @@ const Feedback = () => {
     axios(options)
       .then((response) => {
         console.log(response);
-        // navigate("../Signup");
+        setfeed({
+          title: "",
+          feedback: "",
+        });
+        alert("Feedback Given");
         // console.log(response.data.found, response);
       })
       .catch((err) => {
@@ -45,12 +49,11 @@ const Feedback = () => {
           <div className="input-box">
             <input
               type="text"
-              placeholder="Email"
+              placeholder="Title"
               id="em-input"
-              name="user_email"
-              value={feed.user_email}
+              name="title"
+              value={feed.title}
               onChange={handle}
-              data-testid="em_tid"
             />
             <textarea
               type="text"
@@ -59,7 +62,6 @@ const Feedback = () => {
               name="feedback"
               value={feed.feedback}
               onChange={handle}
-              data-testid="feed_tid"
             />
             <button className="butt" onClick={clickHandel}>
               Submit

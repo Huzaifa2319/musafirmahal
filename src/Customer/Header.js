@@ -22,7 +22,7 @@ const Header = () => {
         <div className={`nav-elements1  ${showNavbar && "active"}`}>
           <ul>
             <li>
-              <NavLink to="/home">Home</NavLink>
+              <NavLink to="/h">Home</NavLink>
             </li>
             <li>
               <NavLink to="/trips">Trips</NavLink>
@@ -32,7 +32,7 @@ const Header = () => {
             </li>
             <li
               onClick={() => {
-                navigate("/home");
+                navigate("/");
               }}
             >
               {/* <NavLink to="/home"></NavLink> */}

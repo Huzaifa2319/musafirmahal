@@ -28,12 +28,13 @@ const AddTrip = () => {
     // setTrip({});
 
     const options = {
-      url: "http://localhost:3001/addTrip",
+      url: "https://musafirmahalbackend.vercel.app/addTrip",
       method: "POST",
       data: trip,
     };
     axios(options)
       .then((response) => {
+        console.log(response.data);
         alert(`Your Trip has been added successfully`);
       })
       .catch((err) => {
@@ -203,10 +204,13 @@ const ImageUpload = ({ setimg }) => {
       formData.append("image", selectedFile);
 
       try {
-        const response = await fetch("http://localhost:3001/upload", {
-          method: "POST",
-          body: formData,
-        });
+        const response = await fetch(
+          "https://musafirmahalbackend.vercel.app/upload",
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
 
         const data = await response.json();
         console.log("Uploaded Image URL:", data.imageUrl);

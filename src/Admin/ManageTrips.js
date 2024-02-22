@@ -6,7 +6,7 @@ import "./Style.css";
 const ManageTrips = () => {
   const [trips, setTrips] = useState([{}]);
   const options = {
-    url: "http://localhost:3001/getTrips",
+    url: "https://musafirmahalbackend.vercel.app/getTrips",
     method: "GET",
   };
 
@@ -81,7 +81,7 @@ const Row = (props) => {
   const delHandel = () => {
     alert(props.tripid);
     const request = {
-      url: `http://localhost:3001/deleteTrip/${props.tripid}`,
+      url: `https://musafirmahalbackend.vercel.app/deleteTrip/${props.tripid}`,
       method: "DELETE",
     };
 
@@ -97,7 +97,7 @@ const Row = (props) => {
 
   const expireHandel = () => {
     const request = {
-      url: `http://localhost:3001/updateTrips/${props.tripid}`,
+      url: `https://musafirmahalbackend.vercel.app/updateTrips/${props.tripid}`,
       method: "PUT",
       data: { isExpire: props.isExpire },
     };

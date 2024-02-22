@@ -14,7 +14,7 @@ const ItemDetails = () => {
   useEffect(() => {
     // alert(id);
     axios
-      .get(`http://localhost:3001/searchTrip/${id}`)
+      .get(`https://musafirmahalbackend.vercel.app/searchTrip/${id}`)
       .then((response) => {
         console.log("-->", response.data);
         setTrip(response.data);
@@ -103,12 +103,13 @@ const ItemDetails = () => {
                 +
               </button>
             </div>
+            <br />
             <span className="fon">10% 0ff on more than 3 tickets</span>
 
             {/* <hr /> */}
             <button
               className="butt"
-              style={{ display: "inline", width: "50%" }}
+              style={{ display: "block", width: "50%", margin: "10px 0 0 0" }}
             >
               Buy
             </button>

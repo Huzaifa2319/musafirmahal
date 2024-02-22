@@ -17,7 +17,7 @@ function App() {
     <>
       <Header />
       <Routes>
-        <Route path="/home" element={<Main />} />
+        <Route exact path="/h" element={<Main />} />
         <Route path="/trips" element={<Home />} />
         <Route path="/feedback" element={<Feedback />} />
         <Route path="/profile" element={<Profile />} />
