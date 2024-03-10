@@ -4,7 +4,7 @@ import "../style/Header.css";
 import { useNavigate } from "react-router-dom";
 
 const log1 = require("../images/log1.png");
-const Header = () => {
+const Header = ({ isLogin, setLogin }) => {
   const navigate = useNavigate();
   const [showNavbar, setShowNavbar] = useState(false);
 
@@ -13,46 +13,52 @@ const Header = () => {
   };
 
   return (
-    <nav className="navbar1">
-      <div className="container1">
-        <img src={log1} className="logo1" alt="error 69" />
-        <div className="menu-icon1" onClick={handleShowNavbar}>
-          <Hamburger />
-        </div>
-        <div className={`nav-elements1  ${showNavbar && "active"}`}>
-          <ul>
-            <li>
-              <NavLink to="/">Home</NavLink>
-            </li>
-            <li>
-              <NavLink to="/trips">Trips</NavLink>
-            </li>
-            <li>
-              <NavLink to="/feedback">Feedback</NavLink>
-            </li>
-            <li
-              onClick={() => {
-                navigate("/");
-              }}
-            >
-              {/* <NavLink to="/home"></NavLink> */}
-              <a href="#services"> About</a>
-            </li>
-            <li>
-              <NavLink to="/contact">My Tickets</NavLink>
-            </li>
-            <li>
-              <NavLink to="/profile">Profile</NavLink>
-            </li>
-            {/* <li>
+    <>
+      {isLogin ? (
+        <nav className="navbar1">
+          <div className="container1">
+            <img src={log1} className="logo1" alt="error 69" />
+            <div className="menu-icon1" onClick={handleShowNavbar}>
+              <Hamburger />
+            </div>
+            <div className={`nav-elements1  ${showNavbar && "active"}`}>
+              <ul>
+                <li>
+                  <NavLink to="/">Home</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/trips">Trips</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/feedback">Feedback</NavLink>
+                </li>
+                <li
+                  onClick={() => {
+                    navigate("/");
+                  }}
+                >
+                  {/* <NavLink to="/home"></NavLink> */}
+                  <a href="#services"> About</a>
+                </li>
+                <li>
+                  <NavLink to="/contact">My Tickets</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/profile">Profile</NavLink>
+                </li>
+                {/* <li>
               <h3>
                 <i class="fa fa-sign-out" aria-hidden="true"></i>
               </h3>
             </li> */}
-          </ul>
-        </div>
-      </div>
-    </nav>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      ) : (
+        <></>
+      )}
+    </>
   );
 };
 

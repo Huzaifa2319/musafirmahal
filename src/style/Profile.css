@@ -12,3 +12,12 @@
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), #5837b3);
 }
+
+.changepass {
+  text-align: center;
+}
+.changepass input {
+  display: block;
+  margin: 3px auto 3px auto;
+  padding: 5px;
+}

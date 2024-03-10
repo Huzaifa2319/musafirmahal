@@ -88,7 +88,7 @@ const Card = (props) => {
             <p>{props.description}</p>
             <h6 style={{ color: "green" }}>Sold: 5</h6>
             <Link to={`/details/${props.tripid}`} className="read-more">
-              Read more{" "}
+              Details{" "}
               {/* <span className="sr-only">about this is some title</span> */}
               <svg
                 xmlns="http://www.w3.org/2000/svg"

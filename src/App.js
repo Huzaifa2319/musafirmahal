@@ -9,26 +9,36 @@ import Services from "./Customer/Services";
 import Form from "./Customer/Login";
 import Signup from "./Customer/Signup";
 import ItemDetails from "./Customer/ItemDetails";
-import AddTrip from "./Admin/AddTrip";
-import ManageTrips from "./Admin/ManageTrips";
-
+import { useState, useEffect } from "react";
 function App() {
+  const [login, setLogin] = useState(
+    localStorage.getItem("token") ? true : false
+  );
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setLogin(token ? true : false);
+  }, [login]);
+
   return (
     <>
-      <Header />
+      <Header isLogin={login} setLogin={setLogin} />
+
       <Routes>
         <Route exact path="/" element={<Main />} />
         <Route path="/trips" element={<Home />} />
         <Route path="/feedback" element={<Feedback />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/about" element={<Services />} />
-        <Route path="/login" element={<Form />} />
+        <Route
+          path="/login"
+          isLogin={login}
+          setLogin={setLogin}
+          element={<Form isLogin={login} setLogin={setLogin} />}
+        />
         <Route path="/signup" element={<Signup />} />
         <Route path="/details/:id" element={<ItemDetails />} />
-        <Route path="/addTrip" element={<AddTrip />} />
-        <Route path="/manageTrips" element={<ManageTrips />} />
       </Routes>
-      <Footer />
+      <Footer isLogin={login} />
     </>
   );
 }

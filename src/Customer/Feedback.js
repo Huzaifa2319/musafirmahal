@@ -3,7 +3,7 @@ import React from "react";
 import "../style/Feedback.css";
 import { useState } from "react";
 import axios from "axios";
-
+import Swal from "sweetalert2";
 const Feedback = () => {
   // let navigate = useNavigate();
 
@@ -32,7 +32,14 @@ const Feedback = () => {
           title: "",
           feedback: "",
         });
-        alert("Feedback Given");
+        // alert("Feedback Given");
+        Swal.fire({
+          // position: "top-end",
+          icon: "success",
+          title: "Feedback has been given",
+          showConfirmButton: false,
+          timer: 1500,
+        });
         // console.log(response.data.found, response);
       })
       .catch((err) => {

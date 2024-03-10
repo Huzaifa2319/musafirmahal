@@ -1,12 +1,22 @@
 import React from "react";
 // import "bootstrap/dist/css/bootstrap.min.css";
 import "../style/login.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import "../style/login.css";
 
-const Form = () => {
+const Form = ({ isLogin, setLogin }) => {
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      setLogin(false);
+    }
+    if (isLogin) {
+      console.log("login ha user");
+      navigate("/");
+    }
+  });
+
   let navigate = useNavigate();
 
   const [user, setUser] = useState({
@@ -29,9 +39,14 @@ const Form = () => {
     axios(options)
       .then((response) => {
         console.log(response.data);
-        // navigate("../home");
+        let token = response.data.data.token;
+        localStorage.setItem("token", token);
+        localStorage.setItem("currentUser", response.data.data.id);
+        setLogin(true);
+        // navigate("../");
       })
       .catch((err) => {
+        alert("incorrect email  or password");
         console.log(err);
       });
   };

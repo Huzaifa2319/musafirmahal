@@ -5,6 +5,7 @@ import vid2 from "../images/vid2.mp4";
 import "../style/Main_vid.css";
 import Services from "./Services";
 import Gallery from "./Gallery";
+import Map from "./Map";
 const Main = () => {
   return (
     <>
@@ -21,6 +22,7 @@ const Main = () => {
       </div>
       <Services />
       <Gallery />
+      <Map />
     </>
   );
 };
