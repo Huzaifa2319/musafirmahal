@@ -35,7 +35,8 @@ const Form = ({ isLogin, setLogin }) => {
       method: "POST",
       data: user,
     };
-    console.log(user);
+    console.log("option is ", options);
+    console.log("user is ", user);
     axios(options)
       .then((response) => {
         console.log(response.data);
