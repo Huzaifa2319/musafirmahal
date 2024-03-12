@@ -18,8 +18,14 @@ const ItemDetails = () => {
 
   const getinfo = () => {
     const uid = localStorage.getItem("currentUser");
-    axios
-      .get(`https://musafirmahalbackend.vercel.app/getUser/${uid}`)
+    const token = localStorage.getItem("token");
+    axios({
+      url: `https://musafirmahalbackend.vercel.app/getUser/${uid}`,
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((response) => {
         console.log(response.data);
         setUserData(response.data);
@@ -105,8 +111,15 @@ const ItemDetails = () => {
       confirmButtonText: "Confirm!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios
-          .post("https://musafirmahalbackend.vercel.app/bookTrip", obj)
+        const token = localStorage.getItem("token");
+        axios({
+          url: "https://musafirmahalbackend.vercel.app/bookTrip",
+          method: "POST",
+          data: obj,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
           .then((res) => {
             console.log(res.data);
             Swal.fire({
