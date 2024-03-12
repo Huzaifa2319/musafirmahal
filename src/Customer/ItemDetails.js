@@ -19,7 +19,7 @@ const ItemDetails = () => {
   const getinfo = () => {
     const uid = localStorage.getItem("currentUser");
     axios
-      .get(`http://localhost:3001/getUser/${uid}`)
+      .get(`https://musafirmahalbackend.vercel.app/getUser/${uid}`)
       .then((response) => {
         console.log(response.data);
         setUserData(response.data);
@@ -106,7 +106,7 @@ const ItemDetails = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .post("http://localhost:3001/bookTrip", obj)
+          .post("https://musafirmahalbackend.vercel.app/bookTrip", obj)
           .then((res) => {
             console.log(res.data);
             Swal.fire({

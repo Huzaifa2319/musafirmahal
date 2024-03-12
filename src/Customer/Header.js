@@ -46,11 +46,19 @@ const Header = ({ isLogin, setLogin }) => {
                 <li>
                   <NavLink to="/profile">Profile</NavLink>
                 </li>
-                {/* <li>
-              <h3>
-                <i class="fa fa-sign-out" aria-hidden="true"></i>
-              </h3>
-            </li> */}
+                <li>
+                  <div
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {
+                      localStorage.removeItem("token");
+                      setLogin(false);
+                      navigate("/login");
+                    }}
+                  >
+                    <i class="fa fa-sign-out" aria-hidden="true"></i>
+                    Logout
+                  </div>
+                </li>
               </ul>
             </div>
           </div>

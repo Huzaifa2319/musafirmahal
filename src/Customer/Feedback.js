@@ -2,11 +2,12 @@ import React from "react";
 // import { Link } from "react-router-dom";
 import "../style/Feedback.css";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 import Logout from "../Logout";
 const Feedback = () => {
-  // let navigate = useNavigate();
+  let navigate = useNavigate();
 
   const [feed, setfeed] = useState({
     title: "",
@@ -21,10 +22,14 @@ const Feedback = () => {
 
   const clickHandel = () => {
     feed.name = localStorage.getItem("UserEmail");
+    const token = localStorage.getItem("token");
     const options = {
       url: "https://musafirmahalbackend.vercel.app/giveFeedback",
       method: "POST",
       data: feed,
+      headers: {
+        // Authorization: `Bearer ${token}`,
+      },
     };
     console.log("-----", feed);
     axios(options)
@@ -46,6 +51,7 @@ const Feedback = () => {
       })
       .catch((err) => {
         Logout();
+        navigate("/login");
         console.log(err);
       });
   };

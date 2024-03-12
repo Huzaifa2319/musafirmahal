@@ -18,7 +18,7 @@ const Signup = () => {
     console.log(user);
     // axios POST request
     const options = {
-      url: "http://localhost:3001/signup",
+      url: "https://musafirmahalbackend.vercel.app/signup",
       method: "POST",
       data: user,
     };

@@ -45,8 +45,14 @@ export default function Profile() {
 
   const getinfo = () => {
     const id = localStorage.getItem("currentUser");
-    axios
-      .get(`http://localhost:3001/getUser/${id}`)
+    const token = localStorage.getItem("token");
+    axios({
+      url: `https://musafirmahalbackend.vercel.app/getUser/${id}`,
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((response) => {
         console.log(response.data);
         setUserData(response.data);
@@ -181,12 +187,16 @@ export default function Profile() {
                       confirmButtonText: "Save",
                     }).then((result) => {
                       if (result.isConfirmed) {
+                        const token = localStorage.getItem("token");
                         let obj = { newpassword: pass.newpassword, id: id };
                         console.log("obj is ", obj);
                         axios({
-                          url: "http://localhost:3001/changePassword",
+                          url: "https://musafirmahalbackend.vercel.app/changePassword",
                           data: obj,
                           method: "put",
+                          headers: {
+                            Authorization: `Bearer ${token}`,
+                          },
                         })
                           .then((response) => {
                             console.log(">>>", response.data);

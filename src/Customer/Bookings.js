@@ -1,17 +1,19 @@
 import React from "react";
-import { useState, useEffect, useNavigate } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import "../style/Booking.css";
 import Logout from "../Logout";
+import { useNavigate } from "react-router-dom";
 
 const Bookings = () => {
   const [book, setBook] = useState([]);
+  const navigate = useNavigate();
   function fetchT() {
     let token = localStorage.getItem("token");
     let userId = localStorage.getItem("currentUser");
     const options = {
-      url: `http://localhost:3001/mybookings/${userId}`,
+      url: `https://musafirmahalbackend.vercel.app/mybookings/${userId}`,
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -25,6 +27,7 @@ const Bookings = () => {
       .catch((err) => {
         console.log(err);
         Logout();
+        navigate("/login");
         // localStorage.removeItem("adtoken");
         // navigate("/login");
       });
@@ -70,18 +73,25 @@ const Bookings = () => {
 };
 
 const Row = (props) => {
+  const navigate = useNavigate();
+
   const [trip, setTrip] = useState({});
   useEffect(() => {
-    axios
-      .get(
-        `https://musafirmahalbackend.vercel.app/searchTrip/${props.data.tripId}`
-      )
+    const token = localStorage.getItem("token");
+    axios({
+      url: `https://musafirmahalbackend.vercel.app/searchTrip/${props.data.tripId}`,
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((response) => {
         console.log("-->", response.data);
         setTrip(response.data);
       })
       .catch((err) => {
-        Logout();
+        // Logout();
+        // navigate("/login");
         console.log(err);
       });
   }, []);
