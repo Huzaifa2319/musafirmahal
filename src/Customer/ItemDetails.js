@@ -32,6 +32,7 @@ const ItemDetails = () => {
         setUserData(response.data);
       })
       .catch((err) => {
+        alert(`111111111`);
         Logout();
         navigate("/login");
         console.log("-->", err);
@@ -48,6 +49,7 @@ const ItemDetails = () => {
         setTrip(response.data);
       })
       .catch((err) => {
+        alert(`22222222222`);
         Logout();
         navigate("/login");
         console.log(err);
@@ -135,6 +137,7 @@ const ItemDetails = () => {
           })
           .catch((err) => {
             Logout();
+            alert(`3333333333`);
             navigate("/login");
             console.log(err);
           });
