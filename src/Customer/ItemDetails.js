@@ -43,6 +43,8 @@ const ItemDetails = () => {
     getinfo();
     // alert(id);
     const token = localStorage.getItem("token");
+    console.log("token is : ", token);
+    console.log("id is :", id);
     axios({
       url: `https://musafirmahalbackend.vercel.app/searchTrip/${id}`,
       method: "GET",
