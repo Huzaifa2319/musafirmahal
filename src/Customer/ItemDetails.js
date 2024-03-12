@@ -42,14 +42,19 @@ const ItemDetails = () => {
   useEffect(() => {
     getinfo();
     // alert(id);
-    axios
-      .get(`https://musafirmahalbackend.vercel.app/searchTrip/${id}`)
+    const token = localStorage.getItem("token");
+    axios({
+      url: `https://musafirmahalbackend.vercel.app/searchTrip/${id}`,
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((response) => {
         console.log("-->", response.data);
         setTrip(response.data);
       })
       .catch((err) => {
-        alert(`22222222222`);
         Logout();
         navigate("/login");
         console.log(err);
