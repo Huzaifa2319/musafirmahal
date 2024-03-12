@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../style/IDetails.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 // const pic = require("../images/bg.jpg");
@@ -9,6 +9,7 @@ import Logout from "../Logout";
 const st = { width: "25px", height: "25px" };
 
 const ItemDetails = () => {
+  const navigate = useNavigate();
   const { id, status } = useParams();
   console.log("id is ", id, " status is ", status);
   const [trip, setTrip] = useState("");
@@ -32,6 +33,7 @@ const ItemDetails = () => {
       })
       .catch((err) => {
         Logout();
+        navigate("/login");
         console.log("-->", err);
       });
   };
@@ -47,6 +49,7 @@ const ItemDetails = () => {
       })
       .catch((err) => {
         Logout();
+        navigate("/login");
         console.log(err);
       });
   }, []);
@@ -132,6 +135,7 @@ const ItemDetails = () => {
           })
           .catch((err) => {
             Logout();
+            navigate("/login");
             console.log(err);
           });
       }
