@@ -28,7 +28,7 @@ const Feedback = () => {
       method: "POST",
       data: feed,
       headers: {
-        // Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     };
     console.log("-----", feed);

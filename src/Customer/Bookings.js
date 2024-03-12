@@ -112,7 +112,7 @@ const Row = (props) => {
     Swal.fire({
       title: "Details",
       // text: "You won't be able to revert this!",
-      html: ` 
+      html: `
       <h6>Full Name:${" " + props.data.name}</h6>
       <h6>CNIC:${" " + props.data.cnic}</h6>
       <h6>Phone Number:${" " + props.data.phone}</h6>
