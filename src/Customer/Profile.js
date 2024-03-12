@@ -13,7 +13,7 @@ import "../style/Profile.css";
 import axios from "axios";
 import "../style/Profile.css";
 import Swal from "sweetalert2";
-
+import Logout from "../Logout";
 // let st = {
 //   backgroundColor: "#f4f5f7",
 //   height: "fit-content",
@@ -52,6 +52,7 @@ export default function Profile() {
         setUserData(response.data);
       })
       .catch((err) => {
+        Logout();
         console.log("-->", err);
       });
   };
@@ -195,6 +196,7 @@ export default function Profile() {
                             setPass({ newpassword: "", confirmpassword: "" });
                           })
                           .catch((err) => {
+                            Logout();
                             console.log("err is ", err);
                           });
                       }

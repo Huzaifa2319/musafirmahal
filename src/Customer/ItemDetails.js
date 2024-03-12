@@ -3,15 +3,35 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../style/IDetails.css";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import Swal from "sweetalert2";
 // const pic = require("../images/bg.jpg");
-
+import Logout from "../Logout";
 const st = { width: "25px", height: "25px" };
 
 const ItemDetails = () => {
-  const { id } = useParams();
+  const { id, status } = useParams();
+  console.log("id is ", id, " status is ", status);
   const [trip, setTrip] = useState("");
   const [num, setNum] = useState(1);
+
+  const [userData, setUserData] = useState({});
+
+  const getinfo = () => {
+    const uid = localStorage.getItem("currentUser");
+    axios
+      .get(`http://localhost:3001/getUser/${uid}`)
+      .then((response) => {
+        console.log(response.data);
+        setUserData(response.data);
+      })
+      .catch((err) => {
+        Logout();
+        console.log("-->", err);
+      });
+  };
+
   useEffect(() => {
+    getinfo();
     // alert(id);
     axios
       .get(`https://musafirmahalbackend.vercel.app/searchTrip/${id}`)
@@ -20,9 +40,90 @@ const ItemDetails = () => {
         setTrip(response.data);
       })
       .catch((err) => {
+        Logout();
         console.log(err);
       });
   }, []);
+
+  // var btn = document.getElementById("buybtn");
+  // btn.setAttribute("disabled", "");
+  // btn.classList.remove("butt");
+  // btn.classList.add("disabled");
+
+  function buyHandle() {
+    function calculateDiscount() {
+      let oneseat = trip.price;
+      let dis = trip.discount;
+      let minSeat = trip.minticketsfordiscount;
+      let tot = oneseat * num;
+      if (dis > 0 && minSeat > 0) {
+        if (num >= minSeat) {
+          let minus = (tot * dis) / 100;
+          return minus;
+        } else {
+          return 0;
+        }
+      } else {
+        return 0;
+      }
+    }
+
+    const obj = {
+      name: userData.full_name,
+      userId: userData._id,
+      cnic: userData.cnic,
+      phone: userData.phone_number,
+      email: userData.email,
+      tripId: id,
+      no_tickets: num,
+      total: trip.price * num,
+      discount: calculateDiscount(),
+      grandTotal: trip.price * num - calculateDiscount(),
+    };
+
+    Swal.fire({
+      title: "Details",
+      // text: "You won't be able to revert this!",
+      html: ` 
+      <h6>Full Name:${" " + obj.name}</h6>
+      <h6>CNIC:${" " + obj.cnic}</h6>
+      <h6>Phone Number:${" " + obj.phone}</h6>
+      <h6>Email:${" " + obj.email}</h6>
+      <hr/>
+      <h6>${trip.name + " [" + trip.date + "]"}</h6>
+      <h6>Trip Id:${" " + obj.tripId}</h6>
+      <h6>No of Tickets:${" " + num}</h6>
+      <hr/>
+      <h6>Total:${" " + obj.total}</h6>
+      <h6>Discount${"(" + trip.discount + "%) :" + obj.discount}</h6>
+      <h6>Grand Total: ${" " + obj.grandTotal}</h6>
+      `,
+      // icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Confirm!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .post("http://localhost:3001/bookTrip", obj)
+          .then((res) => {
+            console.log(res.data);
+            Swal.fire({
+              title: "Booked!",
+              text: "Your booking has been requested.",
+              footer:
+                "Your Booking is Pending. Our team will contact you soon for confirmation...",
+              icon: "success",
+            });
+          })
+          .catch((err) => {
+            Logout();
+            console.log(err);
+          });
+      }
+    });
+  }
 
   return (
     <>
@@ -31,7 +132,6 @@ const ItemDetails = () => {
           <div>
             <img
               src={trip.img}
-              // src="https://i.ibb.co/3msVHYZ/sneaker-image.png"
               className="wrapper-image"
               loading="lazy"
               alt="loading"
@@ -95,7 +195,7 @@ const ItemDetails = () => {
               <button
                 style={st}
                 onClick={() => {
-                  if (num < 5) {
+                  if (num < 10) {
                     setNum(num + 1);
                   }
                 }}
@@ -104,15 +204,29 @@ const ItemDetails = () => {
               </button>
             </div>
             <br />
-            <span className="fon">10% 0ff on more than 3 tickets</span>
-
+            {trip.discount > 0 && trip.minticketsfordiscount > 0 ? (
+              <span className="fon">
+                {trip.discount}% 0ff on more than {trip.minticketsfordiscount}{" "}
+                or more tickets
+              </span>
+            ) : (
+              <></>
+            )}
             {/* <hr /> */}
-            <button
-              className="butt"
-              style={{ display: "block", width: "50%", margin: "10px 0 0 0" }}
-            >
-              Buy
-            </button>
+            {status == "true" ? (
+              <button className="disabled" disabled>
+                Buy
+              </button>
+            ) : (
+              <button
+                className="butt"
+                id="buybtn"
+                style={{ display: "block", width: "50%", margin: "10px 0 0 0" }}
+                onClick={buyHandle}
+              >
+                Buy
+              </button>
+            )}
           </div>
         </div>
       </div>

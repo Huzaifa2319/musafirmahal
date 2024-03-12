@@ -4,6 +4,7 @@ import "../style/Feedback.css";
 import { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
+import Logout from "../Logout";
 const Feedback = () => {
   // let navigate = useNavigate();
 
@@ -19,6 +20,7 @@ const Feedback = () => {
   };
 
   const clickHandel = () => {
+    feed.name = localStorage.getItem("UserEmail");
     const options = {
       url: "https://musafirmahalbackend.vercel.app/giveFeedback",
       method: "POST",
@@ -43,6 +45,7 @@ const Feedback = () => {
         // console.log(response.data.found, response);
       })
       .catch((err) => {
+        Logout();
         console.log(err);
       });
   };

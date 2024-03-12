@@ -41,7 +41,7 @@ const Header = ({ isLogin, setLogin }) => {
                   <a href="#services"> About</a>
                 </li>
                 <li>
-                  <NavLink to="/contact">My Tickets</NavLink>
+                  <NavLink to="/bookings">My Tickets</NavLink>
                 </li>
                 <li>
                   <NavLink to="/profile">Profile</NavLink>

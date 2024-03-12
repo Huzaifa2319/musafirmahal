@@ -42,6 +42,7 @@ const Form = ({ isLogin, setLogin }) => {
         let token = response.data.data.token;
         localStorage.setItem("token", token);
         localStorage.setItem("currentUser", response.data.data.id);
+        localStorage.setItem("UserEmail", response.data.data.email);
         setLogin(true);
         // navigate("../");
       })

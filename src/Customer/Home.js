@@ -4,34 +4,20 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
-const Home = () => {
-  const [trips, setTrips] = useState([]);
-
-  useEffect(() => {
-    axios({
-      url: "https://musafirmahalbackend.vercel.app/gettrips",
-      method: "GET",
-    })
-      .then((response) => {
-        console.log(response.data);
-        setTrips(response.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+const Home = ({ trips, setTrip }) => {
+  useEffect(() => {}, []);
 
   return (
     <>
       <div className="home">
-        <div class="wrapper">
+        {/* <div class="wrapper">
           <div class="search-input">
             <input type="text" placeholder="Type to search.." />
             <div class="icon">
               <i class="fas fa-search"></i>
             </div>
           </div>
-        </div>
+        </div> */}
         <section className="articles">
           {trips.filter((t) => t.isExpire == false).length == 0 ? (
             <h2 style={{ color: "red" }}>No Trips Available</h2>
@@ -87,7 +73,10 @@ const Card = (props) => {
             <h2>{props.name}</h2>
             <p>{props.description}</p>
             <h6 style={{ color: "green" }}>Sold: 5</h6>
-            <Link to={`/details/${props.tripid}`} className="read-more">
+            <Link
+              to={`/details/${props.tripid}/${props.isExpire}`}
+              className="read-more"
+            >
               Details{" "}
               {/* <span className="sr-only">about this is some title</span> */}
               <svg
