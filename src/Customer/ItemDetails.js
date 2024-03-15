@@ -20,6 +20,7 @@ const ItemDetails = () => {
   const getinfo = () => {
     const uid = localStorage.getItem("currentUser");
     const token = localStorage.getItem("token");
+
     axios({
       url: `https://musafirmahalbackend.vercel.app/getUser/${uid}`,
       method: "GET",
@@ -70,6 +71,7 @@ const ItemDetails = () => {
 
   function buyHandle() {
     const t = localStorage.getItem("token");
+
     if (!t) {
       Swal.fire({
         title: "You are currently a guest user.",
@@ -83,7 +85,7 @@ const ItemDetails = () => {
         if (result.isConfirmed) {
           // Swal.fire("Saved!", "", "success");
 
-          function buyasguest() {
+          function buyasguest(g) {
             Swal.fire({
               customClass: "swal-wide",
               text: "Something went wrong!",
@@ -96,24 +98,43 @@ const ItemDetails = () => {
                 <div class="user__details">
                   <div class="input__box">
                     <span class="details">Full Name</span>
-                    <input id="n" type="text" placeholder="E.g: John Smith" required />
+                    <input 
+                      id="n" 
+                      type="text" 
+                      placeholder="E.g: John Smith" 
+                      value="${g.name}" 
+                      required 
+                    />
                   </div>
                   <div class="input__box">
                     <span class="details">CNIC</span>
-                    <input id="c" type="number" placeholder="xxxxx-xxxxxxx-x" required />
+                    <input 
+                      id="c" 
+                      type="number" 
+                      placeholder="xxxxx-xxxxxxx-x" 
+                      value="${g.cnic}" 
+                      required 
+                    />
                   </div>
                   <div class="input__box">
                     <span class="details">Email</span>
                     <input
-                      type="email"
                       id="e"
+                      type="email"
+                      value="${g.email}"
                       placeholder="johnsmith@hotmail.com"
                       required
                     />
                   </div>
                   <div class="input__box">
                     <span class="details">Phone Number</span>
-                    <input id="p" type="number" placeholder="03XX-XXXXXXX" required />
+                    <input 
+                      id="p" 
+                      type="number" 
+                      value="${g.phone}" 
+                      placeholder="03XX-XXXXXXX" 
+                      required 
+                    />
                   </div>
                 </div>
               </div>
@@ -134,7 +155,14 @@ const ItemDetails = () => {
                     confirmButtonColor: "#9b958a",
                     text: "Please fill all the fields to continue!",
                   }).then((result) => {
-                    buyasguest();
+                    const x = {
+                      name: name,
+                      cnic: cnic,
+                      email: email,
+                      phone: phone,
+                    };
+                    // console.log("x is ", x);
+                    buyasguest(x);
                   });
                 } else {
                   const obj = {
@@ -204,7 +232,12 @@ const ItemDetails = () => {
               }
             });
           }
-          buyasguest();
+          buyasguest({
+            name: "",
+            cnic: "",
+            phone: "",
+            email: "",
+          });
         } else if (result.isDenied) {
           navigate("/login");
         }
