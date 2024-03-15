@@ -2,7 +2,8 @@ import React from "react";
 import "../style/Footer.css";
 import { Link } from "react-router-dom";
 const log3 = require("../images/log3.png");
-const Footer = ({ isLogin }) => {
+const Footer = () => {
+  const isLogin = true;
   return (
     <>
       {isLogin ? (
