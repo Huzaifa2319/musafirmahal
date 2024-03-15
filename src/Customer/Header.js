@@ -1,15 +1,24 @@
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "../style/Header.css";
 import { useNavigate } from "react-router-dom";
 
 const log1 = require("../images/log1.png");
 const Header = ({ isLogin, setLogin }) => {
+  const about = useRef(null);
+
   const navigate = useNavigate();
   const [showNavbar, setShowNavbar] = useState(false);
 
   const handleShowNavbar = () => {
     setShowNavbar(!showNavbar);
+  };
+
+  const scrollToSection = (elem) => {
+    window.scrollTo({
+      top: elem.current.offsetTop,
+      behavior: "smooth",
+    });
   };
 
   return (
@@ -83,6 +92,7 @@ const Header = ({ isLogin, setLogin }) => {
                   <li
                     onClick={() => {
                       navigate("/");
+                      scrollToSection(about);
                     }}
                   >
                     {/* <NavLink to="/home"></NavLink> */}

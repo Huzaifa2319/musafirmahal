@@ -3,7 +3,7 @@ import React from "react";
 import vid from "../images/vid1.mp4";
 import vid2 from "../images/vid2.mp4";
 import "../style/Main_vid.css";
-import Services from "./Services";
+import Mission from "./Mission";
 import Gallery from "./Gallery";
 import Map from "./Map";
 import Patners from "./Patners";
@@ -24,7 +24,7 @@ const Main = () => {
       </div>
       <Patners />
       <hr />
-      <Services />
+      <Mission />
       <Gallery />
 
       <Map />

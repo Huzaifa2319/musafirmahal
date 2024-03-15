@@ -5,7 +5,7 @@ import Main from "./Customer/Main";
 import Footer from "./Customer/Footer";
 import Feedback from "./Customer/Feedback";
 import Profile from "./Customer/Profile";
-import Services from "./Customer/Services";
+import Mission from "./Customer/Mission";
 import Form from "./Customer/Login";
 import Signup from "./Customer/Signup";
 import ItemDetails from "./Customer/ItemDetails";
@@ -14,7 +14,7 @@ import { useState, useEffect } from "react";
 import ProtectedRoute from "./ProtectedRoutes";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
-// import Navbar from "./Customer/Navbar";
+import Navbar from "./Customer/Navbar";
 function App() {
   const location = useLocation();
 
@@ -41,6 +41,7 @@ function App() {
     const token = localStorage.getItem("token");
     setLogin(token ? true : false);
     getAllTrips();
+    getinfo();
     if (token) {
       const tokenData = JSON.parse(atob(token.split(".")[1]));
       const expirationTime = tokenData.exp * 1000; // Expiration time in milliseconds
@@ -51,6 +52,27 @@ function App() {
       }
     }
   }, [login]);
+  //----------------------------------------------------------------------
+  const [userData, setUserData] = useState({});
+  const getinfo = () => {
+    const id = localStorage.getItem("currentUser");
+    const token = localStorage.getItem("token");
+    axios({
+      url: `https://musafirmahalbackend.vercel.app/getUser/${id}`,
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
+        console.log(response.data);
+        setUserData(response.data);
+      })
+      .catch((err) => {
+        // Logout();
+        console.log("-->", err);
+      });
+  };
 
   //-----------------------------------------------------------------------
   //fetching all trips
@@ -73,10 +95,13 @@ function App() {
   //--------------------------------------------------------------------
   return (
     <>
-      {location.pathname != "/login" && (
+      {/* {location.pathname != "/login" && (
         <Header isLogin={login} setLogin={setLogin} />
+      )} */}
+      {location.pathname != "/login" && (
+        <Navbar isLogin={login} setLogin={setLogin} />
       )}
-      {/* <Navbar /> */}
+      {/* <Navbar isLogin={login} /> */}
       <Routes>
         <Route exact path="/" element={<Main />} />
         <Route
@@ -85,7 +110,7 @@ function App() {
         />
         {/* <Route path="/feedback" element={<Feedback />} /> */}
         {/* <Route path="/profile" element={<Profile />} /> */}
-        {/* <Route path="/about" element={<Services />} /> */}
+        <Route path="/about" element={<Mission />} />
         {/* <Route path="/bookings" element={<Bookings />} /> */}
         <Route
           path="/login"
@@ -114,18 +139,18 @@ function App() {
           path="/profile"
           element={
             <ProtectedRoute user={login}>
-              <Profile />
+              <Profile userData={userData} />
             </ProtectedRoute>
           }
         />
-        <Route
+        {/* <Route
           path="/about"
           element={
             <ProtectedRoute user={login}>
-              <Services />
+              <Mission />
             </ProtectedRoute>
           }
-        />
+        /> */}
         {/* <Route
           path="/trips"
           element={

@@ -5,13 +5,17 @@
   padding: 0;
   margin: 0;
 }
-body {
-  /* margin-top: 1in; */
-  /* margin-bottom: 1in; */
+
+.logo1 {
+  width: 150px;
 }
 
+/* .logo2 {
+  width: 50%;
+} */
+
 .helloworld {
-  padding-bottom: 64px;
+  padding-bottom: 55px;
 }
 
 .navbar input[type="checkbox"],
@@ -20,25 +24,26 @@ body {
 }
 
 .containerx {
-  max-width: 1200px;
+  max-width: 100%;
   width: 90%;
   margin: auto;
 }
 
 .navbar {
-  box-shadow: 0px 5px 10px 0px #aaa;
+  /* box-shadow: 0px 5px 10px 0px #aaa; */
   position: fixed;
   width: 100%;
-  background: #fff;
+  background: #cbc5b4;
   color: #000;
-  opacity: 0.85;
+  opacity: 0.95;
   z-index: 100;
+  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.1);
 }
 
 .navbar-container {
   display: flex;
   justify-content: space-between;
-  height: 50px;
+  height: 45px;
   align-items: center;
 }
 
@@ -46,15 +51,26 @@ body {
   order: 2;
   display: flex;
 }
+
+.menu-items a.active {
+  border-bottom: 3px solid #2f234f;
+  border-radius: 4px;
+}
+
 .logo {
   order: 1;
-  font-size: 2.3rem;
+  /* font-size: 2.3rem; */
 }
 
 .menu-items li {
   list-style: none;
   margin-left: 1.5rem;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
+  transition: 0.3s;
+}
+.menu-items li:hover {
+  transform: scale(1.1);
+  transition: 0.3s;
 }
 
 .navbar a {
@@ -65,7 +81,7 @@ body {
 }
 
 .navbar a:hover {
-  color: #117964;
+  color: #2f234f;
 }
 
 @media (max-width: 768px) {
@@ -81,7 +97,7 @@ body {
   .navbar-container {
     display: block;
     position: relative;
-    height: 64px;
+    height: 50px;
   }
 
   .navbar-container input[type="checkbox"] {
@@ -147,16 +163,16 @@ body {
   }
 
   .navbar .menu-items li {
-    margin-bottom: 1.8rem;
-    font-size: 1.1rem;
-    font-weight: 500;
+    /* margin-bottom: 1.8rem; */
+    /* font-size: 1.1rem; */
+    font-weight: 200;
   }
 
   .logo {
     position: absolute;
     top: 10px;
     right: 15px;
-    font-size: 2.5rem;
+    /* font-size: 2.5rem; */
   }
 
   .navbar-container input[type="checkbox"]:checked ~ .menu-items {
@@ -179,5 +195,9 @@ body {
 @media (max-width: 500px) {
   .navbar-container input[type="checkbox"]:checked ~ .logo {
     display: none;
+  }
+  .logo1 {
+    /* height: 100%; */
+    width: 40%;
   }
 }

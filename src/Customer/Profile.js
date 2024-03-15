@@ -31,8 +31,7 @@ function myFunction() {
   }
 }
 
-export default function Profile() {
-  const [userData, setUserData] = useState({});
+export default function Profile({ userData }) {
   const [pass, setPass] = useState({
     newpassword: "",
     confirmpassword: "",
@@ -43,29 +42,9 @@ export default function Profile() {
     setPass({ ...pass, [name]: value });
   }
 
-  const getinfo = () => {
-    const id = localStorage.getItem("currentUser");
-    const token = localStorage.getItem("token");
-    axios({
-      url: `https://musafirmahalbackend.vercel.app/getUser/${id}`,
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((response) => {
-        console.log(response.data);
-        setUserData(response.data);
-      })
-      .catch((err) => {
-        Logout();
-        console.log("-->", err);
-      });
-  };
-
-  useEffect(() => {
-    getinfo();
-  }, []);
+  // useEffect(() => {
+  //   getinfo();
+  // }, []);
   return (
     <>
       <section className="" style={{ backgroundColor: "#f4f5f7" }}>

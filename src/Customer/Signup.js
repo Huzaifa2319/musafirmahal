@@ -16,7 +16,6 @@ const Signup = () => {
 
   const SubmitHandler = () => {
     console.log(user);
-    // axios POST request
     const options = {
       url: "https://musafirmahalbackend.vercel.app/signup",
       method: "POST",

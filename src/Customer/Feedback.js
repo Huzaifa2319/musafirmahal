@@ -21,39 +21,48 @@ const Feedback = () => {
   };
 
   const clickHandel = () => {
-    feed.name = localStorage.getItem("UserEmail");
-    const token = localStorage.getItem("token");
-    const options = {
-      url: "https://musafirmahalbackend.vercel.app/giveFeedback",
-      method: "POST",
-      data: feed,
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
-    console.log("-----", feed);
-    axios(options)
-      .then((response) => {
-        console.log(response);
-        setfeed({
-          title: "",
-          feedback: "",
-        });
-        // alert("Feedback Given");
-        Swal.fire({
-          // position: "top-end",
-          icon: "success",
-          title: "Feedback has been given",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        // console.log(response.data.found, response);
-      })
-      .catch((err) => {
-        Logout();
-        navigate("/login");
-        console.log(err);
+    if (feed.title == "" || feed.feedback == "") {
+      Swal.fire({
+        icon: "warning",
+        title: "Oops...(Blank Fields)",
+        confirmButtonColor: "#9b958a",
+        text: "Please fill all the fields to continue!",
       });
+    } else {
+      feed.name = localStorage.getItem("UserEmail");
+      const token = localStorage.getItem("token");
+      const options = {
+        url: "https://musafirmahalbackend.vercel.app/giveFeedback",
+        method: "POST",
+        data: feed,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      console.log("-----", feed);
+      axios(options)
+        .then((response) => {
+          console.log(response);
+          setfeed({
+            title: "",
+            feedback: "",
+          });
+          // alert("Feedback Given");
+          Swal.fire({
+            // position: "top-end",
+            icon: "success",
+            title: "Feedback has been given",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          // console.log(response.data.found, response);
+        })
+        .catch((err) => {
+          Logout();
+          navigate("/login");
+          console.log(err);
+        });
+    }
   };
 
   return (
