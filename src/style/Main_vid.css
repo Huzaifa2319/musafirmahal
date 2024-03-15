@@ -48,7 +48,7 @@
   /* background: linear-gradient(to right, #ff497c, #ff497c, #ff497c); */
   font-weight: 800;
   font-size: 80px;
-  width: 1000px;
+  width: 100%;
   text-align: center;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -139,7 +139,7 @@
     background-color: #cbc5b4;
     font-weight: 800;
     font-size: 40px;
-    width: 200px;
+    width: 100%;
     text-align: center;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
