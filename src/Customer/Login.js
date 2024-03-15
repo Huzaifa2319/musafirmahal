@@ -86,6 +86,9 @@ const Form = ({ isLogin, setLogin }) => {
               Not Registered?
               <Link to="/Signup">Sign up</Link>
             </div>
+            <div className="slink">
+              Login as a <Link to="/">Guest</Link>
+            </div>
           </div>
         </div>
       </div>

@@ -13,7 +13,11 @@ import Bookings from "./Customer/Bookings";
 import { useState, useEffect } from "react";
 import ProtectedRoute from "./ProtectedRoutes";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
+// import Navbar from "./Customer/Navbar";
 function App() {
+  const location = useLocation();
+
   const navigate = useNavigate();
   const [login, setLogin] = useState(
     localStorage.getItem("token") ? true : false
@@ -69,14 +73,16 @@ function App() {
   //--------------------------------------------------------------------
   return (
     <>
-      <Header isLogin={login} setLogin={setLogin} />
-
+      {location.pathname != "/login" && (
+        <Header isLogin={login} setLogin={setLogin} />
+      )}
+      {/* <Navbar /> */}
       <Routes>
-        {/* <Route exact path="/" element={<Main />} /> */}
-        {/* <Route
+        <Route exact path="/" element={<Main />} />
+        <Route
           path="/trips"
           element={<Home trips={trips} setTrip={setTrips} />}
-        /> */}
+        />
         {/* <Route path="/feedback" element={<Feedback />} /> */}
         {/* <Route path="/profile" element={<Profile />} /> */}
         {/* <Route path="/about" element={<Services />} /> */}
@@ -120,15 +126,15 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route
+        {/* <Route
           path="/trips"
           element={
             <ProtectedRoute user={login}>
               <Home trips={trips} setTrip={setTrips} />
             </ProtectedRoute>
           }
-        />
-        <Route
+        /> */}
+        {/* <Route
           exact
           path="/"
           element={
@@ -136,7 +142,7 @@ function App() {
               <Main />
             </ProtectedRoute>
           }
-        />
+        /> */}
 
         <Route path="/signup" element={<Signup />} />
         <Route path="/details/:id/:status" element={<ItemDetails />} />

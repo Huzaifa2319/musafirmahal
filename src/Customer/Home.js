@@ -50,7 +50,6 @@ function Show(obj) {
       img={obj.img}
       price={obj.price}
       depLocation={obj.depLocation}
-      estTime={obj.estTime}
       date={obj.date}
       depTime={obj.depTime}
       duration={obj.duration}
@@ -72,7 +71,7 @@ const Card = (props) => {
           <div className="article-body">
             <h2>{props.name}</h2>
             <p>{props.description}</p>
-            <h6 style={{ color: "green" }}>Sold: 5</h6>
+            {/* <h6 style={{ color: "green" }}>Sold: 5</h6> */}
             <Link
               to={`/details/${props.tripid}/${props.isExpire}`}
               className="read-more"

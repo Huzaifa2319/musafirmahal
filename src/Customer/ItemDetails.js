@@ -32,9 +32,9 @@ const ItemDetails = () => {
         setUserData(response.data);
       })
       .catch((err) => {
-        alert(`111111111`);
-        Logout();
-        navigate("/login");
+        // alert(`Weak or no Network ...`);
+        // Logout();
+        // navigate("/login");
         console.log("-->", err);
       });
   };
@@ -57,8 +57,8 @@ const ItemDetails = () => {
         setTrip(response.data);
       })
       .catch((err) => {
-        Logout();
-        navigate("/login");
+        // Logout();
+        // navigate("/login");
         console.log(err);
       });
   }, []);
@@ -69,40 +69,57 @@ const ItemDetails = () => {
   // btn.classList.add("disabled");
 
   function buyHandle() {
-    function calculateDiscount() {
-      let oneseat = trip.price;
-      let dis = trip.discount;
-      let minSeat = trip.minticketsfordiscount;
-      let tot = oneseat * num;
-      if (dis > 0 && minSeat > 0) {
-        if (num >= minSeat) {
-          let minus = (tot * dis) / 100;
-          return minus;
+    const t = localStorage.getItem("token");
+    if (!t) {
+      Swal.fire({
+        title: "You are currently a guest user.",
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: "Continue as Guest",
+        denyButtonText: `Login`,
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          // Swal.fire("Saved!", "", "success");
+        } else if (result.isDenied) {
+          navigate("/login");
+        }
+      });
+    } else {
+      function calculateDiscount() {
+        let oneseat = trip.price;
+        let dis = trip.discount;
+        let minSeat = trip.minticketsfordiscount;
+        let tot = oneseat * num;
+        if (dis > 0 && minSeat > 0) {
+          if (num >= minSeat) {
+            let minus = (tot * dis) / 100;
+            return minus;
+          } else {
+            return 0;
+          }
         } else {
           return 0;
         }
-      } else {
-        return 0;
       }
-    }
 
-    const obj = {
-      name: userData.full_name,
-      userId: userData._id,
-      cnic: userData.cnic,
-      phone: userData.phone_number,
-      email: userData.email,
-      tripId: id,
-      no_tickets: num,
-      total: trip.price * num,
-      discount: calculateDiscount(),
-      grandTotal: trip.price * num - calculateDiscount(),
-    };
+      const obj = {
+        name: userData.full_name,
+        userId: userData._id,
+        cnic: userData.cnic,
+        phone: userData.phone_number,
+        email: userData.email,
+        tripId: id,
+        no_tickets: num,
+        total: trip.price * num,
+        discount: calculateDiscount(),
+        grandTotal: trip.price * num - calculateDiscount(),
+      };
 
-    Swal.fire({
-      title: "Details",
-      // text: "You won't be able to revert this!",
-      html: ` 
+      Swal.fire({
+        title: "Details",
+        // text: "You won't be able to revert this!",
+        html: ` 
       <h6>Full Name:${" " + obj.name}</h6>
       <h6>CNIC:${" " + obj.cnic}</h6>
       <h6>Phone Number:${" " + obj.phone}</h6>
@@ -116,40 +133,41 @@ const ItemDetails = () => {
       <h6>Discount${"(" + trip.discount + "%) :" + obj.discount}</h6>
       <h6>Grand Total: ${" " + obj.grandTotal}</h6>
       `,
-      // icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Confirm!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        const token = localStorage.getItem("token");
-        axios({
-          url: "https://musafirmahalbackend.vercel.app/bookTrip",
-          method: "POST",
-          data: obj,
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-          .then((res) => {
-            console.log(res.data);
-            Swal.fire({
-              title: "Booked!",
-              text: "Your booking has been requested.",
-              footer:
-                "Your Booking is Pending. Our team will contact you soon for confirmation...",
-              icon: "success",
-            });
+        // icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Confirm!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const token = localStorage.getItem("token");
+          axios({
+            url: "https://musafirmahalbackend.vercel.app/bookTrip",
+            method: "POST",
+            data: obj,
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           })
-          .catch((err) => {
-            Logout();
-            alert(`3333333333`);
-            navigate("/login");
-            console.log(err);
-          });
-      }
-    });
+            .then((res) => {
+              console.log(res.data);
+              Swal.fire({
+                title: "Booked!",
+                text: "Your booking has been requested.",
+                footer:
+                  "Your Booking is Pending. Our team will contact you soon for confirmation...",
+                icon: "success",
+              });
+            })
+            .catch((err) => {
+              Logout();
+              alert(`3333333333`);
+              navigate("/login");
+              console.log(err);
+            });
+        }
+      });
+    }
   }
 
   return (
@@ -176,21 +194,18 @@ const ItemDetails = () => {
                 {trip.depLocation}
               </li>
               <li>
-                <strong>Departure Time: </strong>
-                {trip.depTime}
-              </li>
-              <li>
-                <strong>Estimated Journey Time: </strong>
-                {trip.estTime}
-              </li>
-              <li>
-                <strong>Date: </strong>
+                <strong>Departure Date: </strong>
                 {trip.date}
               </li>
               <li>
                 <strong>Duration: </strong>
-                {trip.duration} days
+                {trip.duration}
               </li>
+              <li>
+                <strong>Departure Time (approximate): </strong>
+                {trip.depTime}
+              </li>
+
               <li>
                 <strong>Contact: </strong>
                 {trip.contact}

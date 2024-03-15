@@ -9,13 +9,16 @@ const Footer = ({ isLogin }) => {
         <footer className="footer">
           <div className="footer-left col-md-4 col-sm-6">
             <p className="about">
-              <span> About the company</span> Embark on a journey with our
-              innovative travel app designed to redefine your travel
-              experiences. Discover seamless planning, personalized
-              recommendations, and effortless booking all within our platform.
-              Our company is committed to crafting unforgettable adventures,
-              ensuring convenience and satisfaction at every step of your travel
-              exploration.
+              <span> About the company</span> Musafir Mahal is dedicated to
+              redefining the travel experience in Pakistan. Through our online
+              platform, we facilitate seamless planning and booking for both
+              domestic and international travelers, presenting a wide array of
+              options tailored to diverse budgets and preferences. By
+              consolidating offerings from multiple travel agencies, we empower
+              customers with the ability to make informed decisions. Our
+              overarching objective is to streamline the travel process and
+              bolster Pakistan's tourism sector, thereby catalyzing economic
+              growth.
             </p>
             <div className="icons">
               <a

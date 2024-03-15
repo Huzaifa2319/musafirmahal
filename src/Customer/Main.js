@@ -6,6 +6,7 @@ import "../style/Main_vid.css";
 import Services from "./Services";
 import Gallery from "./Gallery";
 import Map from "./Map";
+import Patners from "./Patners";
 const Main = () => {
   return (
     <>
@@ -20,6 +21,8 @@ const Main = () => {
       <div className="main vid2">
         <video src={vid2} autoPlay loop muted />
       </div>
+      <Patners />
+      <hr />
       <Services />
       <Gallery />
       <Map />

@@ -64,7 +64,33 @@ const Header = ({ isLogin, setLogin }) => {
           </div>
         </nav>
       ) : (
-        <></>
+        <>
+          <nav className="navbar1">
+            <div className="container1">
+              <img src={log1} className="logo1" alt="error 69" />
+              <div className="menu-icon1" onClick={handleShowNavbar}>
+                <Hamburger />
+              </div>
+              <div className={`nav-elements1  ${showNavbar && "active"}`}>
+                <ul>
+                  <li>
+                    <NavLink to="/">Home</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/trips">Trips</NavLink>
+                  </li>
+
+                  <li>
+                    <NavLink to="/login">Login</NavLink>
+                  </li>
+                  {/* <li>
+                    <NavLink to="/profile">Profile</NavLink>
+                  </li> */}
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </>
       )}
     </>
   );
