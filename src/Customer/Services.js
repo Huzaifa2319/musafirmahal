@@ -15,19 +15,18 @@ const Services = () => {
           </div>
           <div className="msgbyteam">
             <p>
-              At Musafir Mahal, our mission is to revolutionize the travel
-              landscape of Pakistan by offering an unparalleled experience to
-              both domestic and international travelers. Through our innovative
-              online platform, we aim to simplify the planning and booking
-              process, providing a diverse range of options customized to suit
-              various budgets and preferences. By collaborating with numerous
-              travel agencies, we empower our customers with comprehensive
-              information, enabling them to make informed decisions
-              effortlessly. Our vision extends beyond mere convenience; we
-              aspire to catalyze economic growth by bolstering Pakistan's
-              tourism sector, ultimately contributing to the nation's
-              development and global recognition as a premier travel
-              destination.
+              Our key objective is to establish a platform that empowers
+              national as well international travelers to seamlessly plan and
+              book their travel experiences in Pakistan. We offer a versatile
+              range of options to accommodate varying budgets and travel
+              preferences. Unlike conventional tourism agencies, our online
+              platform serves as a hub for all travel agencies, empowering
+              customers to compare offerings and exercise their freedom of
+              choice. Our ultimate goal is to promote a vibrant tourism culture
+              in Pakistan by streamlining the travel process. In this way, we
+              not only assist individuals in getting cost-effective,
+              customizable packages but also play a vital role in driving
+              Pakistan's economic growth through the tourism sector.
             </p>
           </div>
         </div>
