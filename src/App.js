@@ -131,7 +131,7 @@ function App() {
           path="/bookings"
           element={
             <ProtectedRoute user={login}>
-              <Bookings />
+              <Bookings trips={trips} />
             </ProtectedRoute>
           }
         />

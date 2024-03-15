@@ -6,7 +6,7 @@ import "../style/Booking.css";
 import Logout from "../Logout";
 import { useNavigate } from "react-router-dom";
 
-const Bookings = () => {
+const Bookings = ({ trips }) => {
   const [book, setBook] = useState([]);
   const navigate = useNavigate();
   function fetchT() {
@@ -41,6 +41,7 @@ const Bookings = () => {
     return (
       <Row
         data={obj}
+        trips={trips}
         // fetchT={fetchT}
       />
     );
@@ -79,24 +80,33 @@ const Row = (props) => {
 
   const [trip, setTrip] = useState({});
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    axios({
-      url: `https://musafirmahalbackend.vercel.app/searchTrip/${props.data.tripId}`,
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((response) => {
-        console.log("-->", response.data);
-        setTrip(response.data);
-      })
-      .catch((err) => {
-        // Logout();
-        // navigate("/login");
-        console.log(err);
-      });
+    for (let i = 0; i < props.trips.length; i++) {
+      if (props.trips[i]._id == props.data.tripId) {
+        setTrip(props.trips[i]);
+        break;
+      }
+    }
   }, []);
+
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
+  //   axios({
+  //     url: `https://musafirmahalbackend.vercel.app/searchTrip/${props.data.tripId}`,
+  //     method: "GET",
+  //     headers: {
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //   })
+  //     .then((response) => {
+  //       console.log("-->", response.data);
+  //       setTrip(response.data);
+  //     })
+  //     .catch((err) => {
+  //       // Logout();
+  //       // navigate("/login");
+  //       console.log(err);
+  //     });
+  // }, []);
 
   var color;
   if (props.data.status === "pending") {
