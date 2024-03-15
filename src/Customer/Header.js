@@ -38,7 +38,7 @@ const Header = ({ isLogin, setLogin }) => {
                   }}
                 >
                   {/* <NavLink to="/home"></NavLink> */}
-                  <a href="#services"> About</a>
+                  <a href="#about"> About</a>
                 </li>
                 <li>
                   <NavLink to="/bookings">My Tickets</NavLink>
@@ -80,9 +80,19 @@ const Header = ({ isLogin, setLogin }) => {
                     <NavLink to="/trips">Trips</NavLink>
                   </li>
 
+                  <li
+                    onClick={() => {
+                      navigate("/");
+                    }}
+                  >
+                    {/* <NavLink to="/home"></NavLink> */}
+                    <a href="#about"> About</a>
+                  </li>
+
                   <li>
                     <NavLink to="/login">Login</NavLink>
                   </li>
+
                   {/* <li>
                     <NavLink to="/profile">Profile</NavLink>
                   </li> */}

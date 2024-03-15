@@ -6,7 +6,7 @@ const Services = () => {
   return (
     <>
       <div style={{ margin: "3%" }}>
-        <div className="row text-center">
+        <div className="row text-center" id="about">
           <div className="col-sm-12 col-md-12 col-md-12">
             <h2>Our Mission and Vision</h2>
             <p>

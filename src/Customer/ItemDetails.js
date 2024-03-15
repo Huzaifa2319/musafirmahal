@@ -79,8 +79,132 @@ const ItemDetails = () => {
         denyButtonText: `Login`,
       }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
+
         if (result.isConfirmed) {
           // Swal.fire("Saved!", "", "success");
+
+          function buyasguest() {
+            Swal.fire({
+              customClass: "swal-wide",
+              text: "Something went wrong!",
+              confirmButtonText: "Next",
+              confirmButtonColor: "#9b958a",
+              html: `    <div class="gf">
+            <div class="containerg">
+              <div class="title">Book Ticket as a Guest</div>
+              <div class="form">
+                <div class="user__details">
+                  <div class="input__box">
+                    <span class="details">Full Name</span>
+                    <input id="n" type="text" placeholder="E.g: John Smith" required />
+                  </div>
+                  <div class="input__box">
+                    <span class="details">CNIC</span>
+                    <input id="c" type="number" placeholder="xxxxx-xxxxxxx-x" required />
+                  </div>
+                  <div class="input__box">
+                    <span class="details">Email</span>
+                    <input
+                      type="email"
+                      id="e"
+                      placeholder="johnsmith@hotmail.com"
+                      required
+                    />
+                  </div>
+                  <div class="input__box">
+                    <span class="details">Phone Number</span>
+                    <input id="p" type="number" placeholder="03XX-XXXXXXX" required />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      `,
+            }).then((result) => {
+              if (result.isConfirmed) {
+                const name = document.getElementById("n").value;
+                const cnic = document.getElementById("c").value;
+                const email = document.getElementById("e").value;
+                const phone = document.getElementById("p").value;
+
+                if (name == "" || cnic == "" || email == "" || phone == "") {
+                  Swal.fire({
+                    icon: "warning",
+                    title: "Oops...(Blank Fields)",
+                    confirmButtonColor: "#9b958a",
+                    text: "Please fill all the fields to continue!",
+                  }).then((result) => {
+                    buyasguest();
+                  });
+                } else {
+                  const obj = {
+                    name: name,
+                    userId: "guestid",
+                    cnic: cnic,
+                    phone: phone,
+                    email: email,
+                    tripId: id,
+                    no_tickets: num,
+                    total: trip.price * num,
+                    discount: 0,
+                    grandTotal: trip.price * num,
+                  };
+                  Swal.fire({
+                    title: "Details",
+                    // text: "You won't be able to revert this!",
+                    html: ` 
+              <h6>Full Name:${" " + obj.name}</h6>
+              <h6>CNIC:${" " + obj.cnic}</h6>
+              <h6>Phone Number:${" " + obj.phone}</h6>
+              <h6>Email:${" " + obj.email}</h6>
+              <hr/>
+              <h6>${trip.name + " [" + trip.date + "]"}</h6>
+              <h6>Trip Id:${" " + obj.tripId}</h6>
+              <h6>No of Tickets:${" " + num}</h6>
+              <hr/>
+              <h6>Total:${" " + obj.total}</h6>
+              <h6>Discount${"(" + trip.discount + "%) :" + obj.discount}</h6>
+              <h6>Grand Total: ${" " + obj.grandTotal}</h6>
+              `,
+                    // icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Confirm!",
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      // const token = localStorage.getItem("token");
+                      axios({
+                        url: "https://musafirmahalbackend.vercel.app/bookTrip",
+                        method: "POST",
+                        data: obj,
+                        // headers: {
+                        //   Authorization: `Bearer ${token}`,
+                        // },
+                      })
+                        .then((res) => {
+                          console.log(res.data);
+                          Swal.fire({
+                            title: "Booked!",
+                            text: "Your booking has been requested.",
+                            footer:
+                              "<b>Congratulations you have succesfully booked your tour with Musafir Mahal!!! Our team will get back to you soon 😉</b>",
+                            icon: "success",
+                          });
+                        })
+                        .catch((err) => {
+                          Logout();
+                          alert(`Something went wrong `);
+                          navigate("/login");
+                          console.log(err);
+                        });
+                    }
+                  });
+                }
+              }
+            });
+          }
+          buyasguest();
         } else if (result.isDenied) {
           navigate("/login");
         }
@@ -155,13 +279,13 @@ const ItemDetails = () => {
                 title: "Booked!",
                 text: "Your booking has been requested.",
                 footer:
-                  "Your Booking is Pending. Our team will contact you soon for confirmation...",
+                  "<b>Congratulations you have succesfully booked your tour with Musafir Mahal!!! Our team will get back to you soon 😉</b>",
                 icon: "success",
               });
             })
             .catch((err) => {
               Logout();
-              alert(`3333333333`);
+              alert(`Something went wrong`);
               navigate("/login");
               console.log(err);
             });
@@ -345,3 +469,140 @@ export default ItemDetails;
 //     </>
 //   );
 // };
+
+//-------------------------------------------------------------------------------------------
+// function buyasguest() {
+//   Swal.fire({
+//     title: "You are currently a guest user.",
+//     showDenyButton: true,
+//     showCancelButton: true,
+//     confirmButtonText: "Continue as Guest",
+//     denyButtonText: `Login`,
+//   }).then((result) => {
+//     /* Read more about isConfirmed, isDenied below */
+
+//     if (result.isConfirmed) {
+//       // Swal.fire("Saved!", "", "success");
+//       Swal.fire({
+//         customClass: "swal-wide",
+//         text: "Something went wrong!",
+//         confirmButtonText: "Next",
+//         confirmButtonColor: "#9b958a",
+//         html: `    <div class="gf">
+//         <div class="containerg">
+//           <div class="title">Book Ticket as a Guest</div>
+//           <div class="form">
+//             <div class="user__details">
+//               <div class="input__box">
+//                 <span class="details">Full Name</span>
+//                 <input id="n" type="text" placeholder="E.g: John Smith" required />
+//               </div>
+//               <div class="input__box">
+//                 <span class="details">CNIC</span>
+//                 <input id="c" type="number" placeholder="xxxxx-xxxxxxx-x" required />
+//               </div>
+//               <div class="input__box">
+//                 <span class="details">Email</span>
+//                 <input
+//                   type="email"
+//                   id="e"
+//                   placeholder="johnsmith@hotmail.com"
+//                   required
+//                 />
+//               </div>
+//               <div class="input__box">
+//                 <span class="details">Phone Number</span>
+//                 <input id="p" type="number" placeholder="03xx-xxxxxxx" required />
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//   `,
+//       }).then((result) => {
+//         if (result.isConfirmed) {
+//           const name = document.getElementById("n").value;
+//           const cnic = document.getElementById("c").value;
+//           const email = document.getElementById("e").value;
+//           const phone = document.getElementById("p").value;
+
+//           if (name == "" || cnic == "" || email == "" || phone == "") {
+//             Swal.fire({
+//               icon: "warning",
+//               title: "Oops...(Blank Fields)",
+//               confirmButtonColor: "#9b958a",
+//               text: "Please fill all the fields to continue!",
+//             });
+//             // buyasguest();
+//           } else {
+//             const obj = {
+//               name: name,
+//               userId: "guestid",
+//               cnic: cnic,
+//               phone: phone,
+//               email: email,
+//               tripId: id,
+//               no_tickets: num,
+//               total: trip.price * num,
+//               discount: 0,
+//               grandTotal: trip.price * num,
+//             };
+//             Swal.fire({
+//               title: "Details",
+//               // text: "You won't be able to revert this!",
+//               html: `
+//           <h6>Full Name:${" " + obj.name}</h6>
+//           <h6>CNIC:${" " + obj.cnic}</h6>
+//           <h6>Phone Number:${" " + obj.phone}</h6>
+//           <h6>Email:${" " + obj.email}</h6>
+//           <hr/>
+//           <h6>${trip.name + " [" + trip.date + "]"}</h6>
+//           <h6>Trip Id:${" " + obj.tripId}</h6>
+//           <h6>No of Tickets:${" " + num}</h6>
+//           <hr/>
+//           <h6>Total:${" " + obj.total}</h6>
+//           <h6>Discount${"(" + trip.discount + "%) :" + obj.discount}</h6>
+//           <h6>Grand Total: ${" " + obj.grandTotal}</h6>
+//           `,
+//               // icon: "warning",
+//               showCancelButton: true,
+//               confirmButtonColor: "#3085d6",
+//               cancelButtonColor: "#d33",
+//               confirmButtonText: "Confirm!",
+//             }).then((result) => {
+//               if (result.isConfirmed) {
+//                 // const token = localStorage.getItem("token");
+//                 axios({
+//                   url: "https://musafirmahalbackend.vercel.app/bookTrip",
+//                   method: "POST",
+//                   data: obj,
+//                   // headers: {
+//                   //   Authorization: `Bearer ${token}`,
+//                   // },
+//                 })
+//                   .then((res) => {
+//                     console.log(res.data);
+//                     Swal.fire({
+//                       title: "Booked!",
+//                       text: "Your booking has been requested.",
+//                       footer:
+//                         "<b>Congratulations you have succesfully booked your tour with Musafir Mahal!!! Our team will get back to you soon 😉</b>",
+//                       icon: "success",
+//                     });
+//                   })
+//                   .catch((err) => {
+//                     Logout();
+//                     alert(`Something went wrong `);
+//                     navigate("/login");
+//                     console.log(err);
+//                   });
+//               }
+//             });
+//           }
+//         }
+//       });
+//     } else if (result.isDenied) {
+//       navigate("/login");
+//     }
+//   });
+// }

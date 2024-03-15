@@ -7,6 +7,7 @@ import Services from "./Services";
 import Gallery from "./Gallery";
 import Map from "./Map";
 import Patners from "./Patners";
+import GuestForm from "./GuestForm";
 const Main = () => {
   return (
     <>
@@ -25,6 +26,7 @@ const Main = () => {
       <hr />
       <Services />
       <Gallery />
+
       <Map />
     </>
   );
