@@ -52,19 +52,21 @@ const Bookings = () => {
         <div className="mtrip">
           <h1>My Bookings</h1>
           <div className="box">
-            <table className="table table-striped table-hover">
-              <thead>
-                <th>Trip</th>
-                <th>Image</th>
-                <th>Date</th>
-                <th>No of Tickets</th>
-                <th>Ammount to be paid(Rs)</th>
-                <th>Status</th>
-                <th>Details</th>
-              </thead>
+            <div class="table-responsive">
+              <table className="table table-striped table-hover">
+                <thead>
+                  <th>Trip</th>
+                  <th>Image</th>
+                  <th>Date</th>
+                  <th>No of Tickets</th>
+                  <th>Ammount to be paid(Rs)</th>
+                  <th>Status</th>
+                  <th>Details</th>
+                </thead>
 
-              <tbody>{book.map(Show)}</tbody>
-            </table>
+                <tbody>{book.map(Show)}</tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
