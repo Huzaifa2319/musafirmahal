@@ -147,7 +147,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/details/:id/:status" element={<ItemDetails />} />
       </Routes>
-      <Footer isLogin={login} />
+      {location.pathname != "/login" && <Footer />}
     </>
   );
 }
