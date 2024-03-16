@@ -1,5 +1,4 @@
 import React from "react";
-// import { Link } from "react-router-dom";
 import "../style/Feedback.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -15,13 +14,12 @@ const Feedback = () => {
   });
 
   const handle = (e) => {
-    // console.log(">>>>", e.target.value);
     const { name, value } = e.target;
     setfeed({ ...feed, [name]: value });
   };
 
   const clickHandel = () => {
-    if (feed.title == "" || feed.feedback == "") {
+    if (feed.title === "" || feed.feedback === "") {
       Swal.fire({
         icon: "warning",
         title: "Oops...(Blank Fields)",
@@ -47,15 +45,13 @@ const Feedback = () => {
             title: "",
             feedback: "",
           });
-          // alert("Feedback Given");
+
           Swal.fire({
-            // position: "top-end",
             icon: "success",
             title: "Feedback has been given",
             showConfirmButton: false,
             timer: 1500,
           });
-          // console.log(response.data.found, response);
         })
         .catch((err) => {
           Logout();
@@ -67,7 +63,6 @@ const Feedback = () => {
 
   return (
     <>
-      {console.log(feed)}
       <div>
         <div className="feedpage">
           <div className="login-box">

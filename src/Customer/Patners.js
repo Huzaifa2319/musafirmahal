@@ -19,7 +19,6 @@ const Patners = () => {
     photoWrapper.addEventListener("scroll", () => {
       photos.forEach(checkPosition);
     });
-    // document.scro;
     function checkPosition(photo) {
       if (photo.getBoundingClientRect().right - 4 <= 0) {
         photo.remove();

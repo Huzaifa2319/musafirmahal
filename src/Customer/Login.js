@@ -1,5 +1,4 @@
 import React from "react";
-// import "bootstrap/dist/css/bootstrap.min.css";
 import "../style/login.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -45,7 +44,6 @@ const Form = ({ isLogin, setLogin }) => {
         localStorage.setItem("currentUser", response.data.data.id);
         localStorage.setItem("UserEmail", response.data.data.email);
         setLogin(true);
-        // navigate("../");
       })
       .catch((err) => {
         alert("incorrect email  or password");

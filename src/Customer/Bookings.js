@@ -21,15 +21,12 @@ const Bookings = ({ trips }) => {
     };
     axios(options)
       .then((response) => {
-        // console.log("response is ", response.data);
         setBook(response.data);
       })
       .catch((err) => {
         console.log(err);
         Logout();
         navigate("/login");
-        // localStorage.removeItem("adtoken");
-        // navigate("/login");
       });
   }
 
@@ -38,13 +35,7 @@ const Bookings = ({ trips }) => {
   }, []);
 
   function Show(obj) {
-    return (
-      <Row
-        data={obj}
-        trips={trips}
-        // fetchT={fetchT}
-      />
-    );
+    return <Row data={obj} trips={trips} />;
   }
 
   return (
@@ -76,37 +67,15 @@ const Bookings = ({ trips }) => {
 };
 
 const Row = (props) => {
-  const navigate = useNavigate();
-
   const [trip, setTrip] = useState({});
   useEffect(() => {
     for (let i = 0; i < props.trips.length; i++) {
-      if (props.trips[i]._id == props.data.tripId) {
+      if (props.trips[i]._id === props.data.tripId) {
         setTrip(props.trips[i]);
         break;
       }
     }
   }, []);
-
-  // useEffect(() => {
-  //   const token = localStorage.getItem("token");
-  //   axios({
-  //     url: `https://musafirmahalbackend.vercel.app/searchTrip/${props.data.tripId}`,
-  //     method: "GET",
-  //     headers: {
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //   })
-  //     .then((response) => {
-  //       console.log("-->", response.data);
-  //       setTrip(response.data);
-  //     })
-  //     .catch((err) => {
-  //       // Logout();
-  //       // navigate("/login");
-  //       console.log(err);
-  //     });
-  // }, []);
 
   var color;
   if (props.data.status === "pending") {
@@ -116,14 +85,10 @@ const Row = (props) => {
   } else if (props.data.status === "confirmed") {
     color = " greenyellow";
   }
-  const st = {
-    background: color,
-  };
 
   const details = () => {
     Swal.fire({
       title: "Details",
-      // text: "You won't be able to revert this!",
       html: `
       <h6>Full Name:${" " + props.data.name}</h6>
       <h6>CNIC:${" " + props.data.cnic}</h6>

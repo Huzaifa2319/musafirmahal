@@ -1,5 +1,4 @@
 import React from "react";
-// import "bootstrap/dist/css/bootstrap.min.css";
 import "../style/login.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";

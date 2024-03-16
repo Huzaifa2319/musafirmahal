@@ -1,4 +1,3 @@
-import React from "react";
 import Swal from "sweetalert2";
 const Logout = () => {
   let timerInterval;
@@ -18,7 +17,6 @@ const Logout = () => {
       clearInterval(timerInterval);
     },
   }).then((result) => {
-    /* Read more about handling dismissals below */
     if (result.dismiss === Swal.DismissReason.timer) {
       console.log("I was closed by the timer");
     }

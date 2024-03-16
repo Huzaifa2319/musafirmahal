@@ -35,7 +35,11 @@ const Footer = () => {
               >
                 <i className="fa fa-instagram"></i>
               </a>
-              <a href="#">
+
+              <a
+                href="https://instagram.com/musafirmahal?igshid=NjIwNzIyMDk2Mg=="
+                target="blank"
+              >
                 <i className="fa fa-twitter"></i>
               </a>
             </div>

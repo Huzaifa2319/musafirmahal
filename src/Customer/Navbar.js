@@ -31,7 +31,6 @@ const Navbar = ({ isLogin, setLogin }) => {
                     navigate("/");
                   }}
                 >
-                  {/* <NavLink to="/home"></NavLink> */}
                   <a href="#services"> About</a>
                 </li>
                 <li>
@@ -55,13 +54,7 @@ const Navbar = ({ isLogin, setLogin }) => {
                   </div>
                 </li>
               </ul>
-              {/* <div> */}
               <img src={logo} className="logo logo1" alt="" />
-              {/* </div> */}
-
-              {/* <div className="logo" style={{ display: "inline-block" }}>
-            <img src={logo} className="logo1" alt="" />
-          </div> */}
             </div>
           </nav>
         </div>
@@ -88,7 +81,6 @@ const Navbar = ({ isLogin, setLogin }) => {
                       navigate("/");
                     }}
                   >
-                    {/* <NavLink to="/home"></NavLink> */}
                     <a href="#services"> About</a>
                   </li>
 

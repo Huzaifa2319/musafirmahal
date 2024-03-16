@@ -1,6 +1,5 @@
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Home from "./Customer/Home";
-import Header from "./Customer/Header";
 import Main from "./Customer/Main";
 import Footer from "./Customer/Footer";
 import Feedback from "./Customer/Feedback";
@@ -16,13 +15,19 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 import Navbar from "./Customer/Navbar";
 function App() {
+  //------------react hooks-----------------
   const location = useLocation();
-
   const navigate = useNavigate();
+
+  //-----------states-------------------
+  const [trips, setTrips] = useState([]);
+  const [userData, setUserData] = useState({});
+
   const [login, setLogin] = useState(
     localStorage.getItem("token") ? true : false
   );
 
+  //------------Session Management------------------
   const token = localStorage.getItem("token");
 
   if (token) {
@@ -33,8 +38,6 @@ function App() {
       setLogin(false);
       navigate("/login");
     }
-  } else {
-    // SignOut({ login, setLogin });
   }
 
   useEffect(() => {
@@ -52,8 +55,9 @@ function App() {
       }
     }
   }, [login]);
-  //----------------------------------------------------------------------
-  const [userData, setUserData] = useState({});
+
+  //-----------------------Get user Data API call-------------------------------------
+
   const getinfo = () => {
     const id = localStorage.getItem("currentUser");
     const token = localStorage.getItem("token");
@@ -74,9 +78,7 @@ function App() {
       });
   };
 
-  //-----------------------------------------------------------------------
-  //fetching all trips
-  const [trips, setTrips] = useState([]);
+  //-----------------------Get Trips API call-------------------------------------
 
   const getAllTrips = () => {
     axios({
@@ -95,23 +97,13 @@ function App() {
   //--------------------------------------------------------------------
   return (
     <>
-      {/* {location.pathname != "/login" && (
-        <Header isLogin={login} setLogin={setLogin} />
-      )} */}
-      {location.pathname != "/login" && (
+      {location.pathname !== "/login" && (
         <Navbar isLogin={login} setLogin={setLogin} />
       )}
-      {/* <Navbar isLogin={login} /> */}
       <Routes>
         <Route exact path="/" element={<Main />} />
-        <Route
-          path="/trips"
-          element={<Home trips={trips} setTrip={setTrips} />}
-        />
-        {/* <Route path="/feedback" element={<Feedback />} /> */}
-        {/* <Route path="/profile" element={<Profile />} /> */}
+        <Route path="/trips" element={<Home trips={trips} />} />
         <Route path="/about" element={<Mission />} />
-        {/* <Route path="/bookings" element={<Bookings />} /> */}
         <Route
           path="/login"
           isLogin={login}
@@ -143,36 +135,11 @@ function App() {
             </ProtectedRoute>
           }
         />
-        {/* <Route
-          path="/about"
-          element={
-            <ProtectedRoute user={login}>
-              <Mission />
-            </ProtectedRoute>
-          }
-        /> */}
-        {/* <Route
-          path="/trips"
-          element={
-            <ProtectedRoute user={login}>
-              <Home trips={trips} setTrip={setTrips} />
-            </ProtectedRoute>
-          }
-        /> */}
-        {/* <Route
-          exact
-          path="/"
-          element={
-            <ProtectedRoute user={login}>
-              <Main />
-            </ProtectedRoute>
-          }
-        /> */}
 
         <Route path="/signup" element={<Signup />} />
         <Route path="/details/:id/:status" element={<ItemDetails />} />
       </Routes>
-      {location.pathname != "/login" && <Footer />}
+      {location.pathname !== "/login" && <Footer />}
     </>
   );
 }

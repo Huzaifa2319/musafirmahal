@@ -12,15 +12,7 @@ const Gallery = () => {
         <div className="row text-center">
           <div className="col-sm-12 col-md-12 col-md-12">
             <h2>We Make Memories</h2>
-            <h2
-              style={
-                {
-                  /*font-size: 60px;line-height: 60px;margin-bottom: 20px;font-weight: 900;*/
-                }
-              }
-            >
-              Our Team
-            </h2>
+            <h2>Our Team</h2>
             <p>
               Our <span className="highlight">experienced</span> and{" "}
               <span className="highlight">dedicated</span> team provide these
@@ -29,7 +21,6 @@ const Gallery = () => {
           </div>
         </div>
       </div>
-      {/* ----------------------------------------- */}
       <div className="gal">
         <div className="container2">
           <div className="box">

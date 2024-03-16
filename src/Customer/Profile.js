@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   MDBCol,
   MDBContainer,
@@ -14,13 +14,6 @@ import axios from "axios";
 import "../style/Profile.css";
 import Swal from "sweetalert2";
 import Logout from "../Logout";
-// let st = {
-//   backgroundColor: "#f4f5f7",
-//   height: "fit-content",
-//   minHeight: "100vh",
-//   textAlign: "center",
-//   alignItem: "center",
-//post
 
 function myFunction() {
   var x = document.getElementById("newp");
@@ -42,9 +35,6 @@ export default function Profile({ userData }) {
     setPass({ ...pass, [name]: value });
   }
 
-  // useEffect(() => {
-  //   getinfo();
-  // }, []);
   return (
     <>
       <section className="" style={{ backgroundColor: "#f4f5f7" }}>
@@ -107,18 +97,6 @@ export default function Profile({ userData }) {
                           </MDBCardText>
                         </MDBCol>
                       </MDBRow>
-
-                      {/* <div className="d-flex justify-content-start">
-                      <a href="#!">
-                        <MDBIcon fab icon="facebook me-3" size="lg" />
-                      </a>
-                      <a href="#!">
-                        <MDBIcon fab icon="twitter me-3" size="lg" />
-                      </a>
-                      <a href="#!">
-                        <MDBIcon fab icon="instagram me-3" size="lg" />
-                      </a>
-                    </div> */}
                     </MDBCardBody>
                   </MDBCol>
                 </MDBRow>
@@ -155,7 +133,7 @@ export default function Profile({ userData }) {
               onClick={() => {
                 const id = localStorage.getItem("currentUser");
 
-                if (pass.newpassword != pass.confirmpassword) {
+                if (pass.newpassword !== pass.confirmpassword) {
                   alert("Passwords do not match");
                 } else {
                   if (pass.confirmpassword.length >= 8) {
@@ -178,10 +156,7 @@ export default function Profile({ userData }) {
                           },
                         })
                           .then((response) => {
-                            console.log(">>>", response.data);
-                            // alert("Password Updated Successfully");
                             Swal.fire("Password Updated!", "", "success");
-
                             setPass({ newpassword: "", confirmpassword: "" });
                           })
                           .catch((err) => {
